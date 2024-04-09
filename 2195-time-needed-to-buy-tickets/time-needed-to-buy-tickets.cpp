@@ -1,28 +1,20 @@
 class Solution {
 public:
     int timeRequiredToBuy(vector<int>& tickets, int k) {
+        queue<int>q;
         int n = tickets.size();
-        int time = 0;
-
-        // If person k only needs one ticket, return the time to buy it
-        if (tickets[k] == 1)
-            return k + 1;
-
-        // Continue buying tickets until person k buys all their tickets
-        while (tickets[k] > 0) {
-            for (int i = 0; i < n; i++) {
-                // Buy a ticket at index 'i' if available
-                if (tickets[i] != 0) {
-                    tickets[i]--;
-                    time++;
-                }
-
-                // If person k bought all their rickets, return the time
-                if (tickets[k] == 0)
-                    return time;
-            }
+        for(int i=0;i<n;i++){
+            q.push(i);
         }
-
+        int time = 0;
+        while(tickets[k]!=0){
+            tickets[q.front()]--;
+            if(tickets[q.front()]){
+                q.push(q.front());
+            }
+            q.pop();
+            time++;
+        }
         return time;
     }
 };
