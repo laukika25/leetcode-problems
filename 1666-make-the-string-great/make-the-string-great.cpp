@@ -1,19 +1,21 @@
 class Solution {
 public:
     string makeGood(string s) {
-        int i = 0;
-        int j = i+1;
-        while(j < s.size()){
-            if(s[i] == s[j] + 32 || s[i] == s[j] - 32){
-                s.erase(i, 2);
-                i = 0;
-                j = i+1;
+        stack<int>st;
+        for(int i = 0; i<s.size(); i++){
+            if(!st.empty() && (s[i] == st.top() + 32 || s[i] == st.top() - 32)){
+                st.pop();
             }
             else{
-                i++;
-                j++;
+                st.push(s[i]);
             }
         }
-        return s;
+        string ans;
+        while(!st.empty()){
+            ans.push_back(st.top());
+            st.pop();
+        }
+        reverse(ans.begin(), ans.end());
+        return ans;
     }
 };
