@@ -5,10 +5,11 @@ public:
         for(int i = 0; i<nums.size(); i++){
             pq.push(nums[i]);
         }
-        while(--k){
+        // Assuming pq is the priority queue and k is the number of pops
+        for (int i = 0; i < k - 1; ++i) {
             pq.pop();
-            
         }
+
         return pq.top();
     }
 };
