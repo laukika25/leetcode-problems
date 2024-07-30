@@ -19,6 +19,7 @@ public:
             if(temp->val == temp->next->val){
                 ListNode* dup = temp->next;
                 temp->next = temp->next->next;
+                dup->next = NULL;
                 delete dup;
             }
             else{
