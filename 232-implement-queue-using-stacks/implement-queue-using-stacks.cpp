@@ -1,41 +1,50 @@
-#include <stack>
-
-using namespace std;
-
 class MyQueue {
 public:
-    stack<int> s1;
-    stack<int> s2;
-
+    stack<int>st1, st2;
     MyQueue() {}
     
     void push(int x) {
-        s1.push(x);
+        while(!st1.empty()){
+            st2.push(st1.top());
+            st1.pop();
+        }
+        st1.push(x);
+        while(!st2.empty()){
+            st1.push(st2.top());
+            st2.pop();
+        }
     }
     
     int pop() {
-        if (s2.empty()) {
-            while (!s1.empty()) {
-                s2.push(s1.top());
-                s1.pop();
-            }
+        if(st1.empty())return -1;
+        else{
+            int c = st1.top();
+            st1.pop();
+            return c;
         }
-        int t = s2.top();
-        s2.pop();
-        return t;
+        
     }
     
     int peek() {
-        if (s2.empty()) {
-            while (!s1.empty()) {
-                s2.push(s1.top());
-                s1.pop();
-            }
+        if(st1.empty())return -1;
+        else{
+            int c = st1.top();
+            return c;
         }
-        return s2.top();
+        
     }
     
     bool empty() {
-        return s1.empty() && s2.empty();
+        if(st1.empty())return true;
+        else return false;
     }
 };
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue* obj = new MyQueue();
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ * int param_3 = obj->peek();
+ * bool param_4 = obj->empty();
+ */
