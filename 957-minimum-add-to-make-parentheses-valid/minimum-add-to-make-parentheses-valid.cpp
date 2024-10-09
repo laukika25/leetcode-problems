@@ -27,12 +27,6 @@ public:
             }
 
         }
-        // int cnt = 0;
-        while(!st.empty()){
-            st.pop();
-            cnt++;
-        }
-        return cnt;
-
+        return st.size();
     }
 };
